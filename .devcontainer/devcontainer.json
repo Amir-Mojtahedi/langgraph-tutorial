@@ -23,7 +23,11 @@
       ],
       "settings": {
         "python.defaultInterpreterPath": "/langgraph-tutorial/.venv/bin/python",
+        "python.terminal.activateEnvironment": true,
         "python.analysis.autoImportCompletions": true,
+        "python.analysis.autoIndent": true,
+        "python.analysis.autoFormatStrings": true,
+        "ruff.interpreter": ["/langgraph-tutorial/.venv/bin/python"],
         "editor.formatOnSave": true,
         "[python]": {
           "editor.defaultFormatter": "charliermarsh.ruff"
@@ -31,7 +35,7 @@
       }
     }
   },
-  "postCreateCommand": "git config --global --add safe.directory /langgraph-tutorial && python -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt",
+  "postCreateCommand": "python -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt",
   "forwardPorts": [
     3000,
     8000
