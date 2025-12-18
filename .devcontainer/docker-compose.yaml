@@ -8,12 +8,10 @@ services:
 
     volumes:
       - ..:/langgraph-tutorial:cached
-      - ~/.gitconfig:/home/vscode/.gitconfig:ro
 
     command: sleep infinity
 
     ports:
-      # Example: FastAPI / Express / whatever
       - "3000:3000"
       - "8000:8000"
 

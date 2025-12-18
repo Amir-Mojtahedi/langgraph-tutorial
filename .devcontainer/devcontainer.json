@@ -5,6 +5,7 @@
   "workspaceFolder": "/langgraph-tutorial",
   "remoteUser": "vscode",
   "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/devcontainers/features/common-utils:2": {
       "username": "vscode",
       "configureZshAsDefaultShell": true
@@ -17,9 +18,7 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "charliermarsh.ruff",
-        "ms-python.python",
-        "ms-python.vscode-pylance"
+        "charliermarsh.ruff"
       ],
       "settings": {
         "python.defaultInterpreterPath": "/langgraph-tutorial/.venv/bin/python",
