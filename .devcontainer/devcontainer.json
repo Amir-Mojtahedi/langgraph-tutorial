@@ -21,23 +21,55 @@
         "charliermarsh.ruff"
       ],
       "settings": {
-        "python.defaultInterpreterPath": "/langgraph-tutorial/.venv/bin/python",
-        "python.terminal.activateEnvironment": true,
+        "python.defaultInterpreterPath": "/usr/local/python/current/bin/python",
+        "python.analysis.diagnosticMode": "workspace",
+        "python.analysis.extraPaths": [
+          "/langgraph-tutorial"
+        ],
+        "python.analysis.typeCheckingMode": "standard",
+        "python.analysis.inlayHints.variableTypes": true,
+        "python.analysis.inlayHints.functionReturnTypes": true,
         "python.analysis.autoImportCompletions": true,
         "python.analysis.autoIndent": true,
         "python.analysis.autoFormatStrings": true,
-        "ruff.interpreter": ["/langgraph-tutorial/.venv/bin/python"],
+        "python.testing.pytestEnabled": true,
+        "python.testing.unittestEnabled": false,
+        "python.testing.pytestArgs": [
+          "-q"
+        ],
+        "python.terminal.activateEnvironment": true,
+        "python.terminal.activateEnvInCurrentTerminal": true,
+        "python.testing.autoTestDiscoverOnSaveEnabled": true,
+        "ruff.interpreter": [
+          "/usr/local/python/current/bin/python"
+        ],
+        "ruff.lint.select": [
+          "E",
+          "F",
+          "I",
+          "B",
+          "UP",
+          "SIM"
+        ],
+        "ruff.lint.ignore": [
+          "E501"
+        ],
+        "ruff.fixAll": true,
+        "ruff.organizeImports": true,
         "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll": "always",
+          "source.organizeImports": "always"
+        },
         "[python]": {
           "editor.defaultFormatter": "charliermarsh.ruff"
         }
       }
     }
   },
-  "postCreateCommand": "python -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt",
+  "postCreateCommand": "sudo chown -R vscode:vscode /langgraph-tutorial && pip install -r requirements.txt",
   "forwardPorts": [
-    3000,
-    8000
+    8501
   ],
   "shutdownAction": "stopCompose"
 }
