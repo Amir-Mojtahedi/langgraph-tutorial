@@ -3,6 +3,13 @@ services:
     build:
       context: ..
       dockerfile: .devcontainer/Dockerfile
+    
+    env_file:
+      - ../.env.dev
+
+    environment:
+      DEBIAN_FRONTEND: noninteractive
+      PYTHONUNBUFFERED: "1"
 
     volumes:
       - ..:/langgraph-tutorial:cached
@@ -11,7 +18,9 @@ services:
       - "8501:8501"
 
     models:
-      - llm   
+      llm:
+        endpoint_var: LOCAL_LLM_URL
+        model_var: LOCAL_LLM_MODEL   
 
     command: sleep infinity
   

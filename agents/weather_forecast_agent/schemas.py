@@ -1,16 +1,15 @@
 """
 Data schemas used by the agent and tools.
 
-Separating these helps avoid circular imports and keeps annotations clean.
+Separated to avoid circular imports and keep annotations clean.
 """
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from pydantic import BaseModel, Field
 
 
-@dataclass
-class Context:
+class Context(BaseModel):
     """Custom runtime context provided to tools at invocation time.
 
     Attributes:
@@ -18,11 +17,10 @@ class Context:
                  (e.g., to infer location preferences).
     """
 
-    user_id: str
+    user_id: str = Field(min_length=1, description="Caller/session identifier")
 
 
-@dataclass
-class ResponseFormat:
+class ResponseFormat(BaseModel):
     """Structured response returned by the agent via ToolStrategy.
 
     Attributes:
@@ -30,5 +28,9 @@ class ResponseFormat:
         weather_conditions: Optional summary of the weather conditions.
     """
 
-    punny_response: str
-    weather_conditions: str | None = None
+    punny_response: str = Field(min_length=1, description="Pun-filled reply")
+    weather_conditions: str | None = Field(
+        default=None,
+        min_length=1,
+        description="Optional weather summary",
+    )
