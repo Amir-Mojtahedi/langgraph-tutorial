@@ -8,8 +8,7 @@ testable and modular.
 """
 
 # Import the composed agent and data models from local modules
-from langchain.messages import AIMessage, HumanMessage
-from langchain_core.messages import BaseMessage
+from langchain.messages import HumanMessage
 from langchain_core.runnables import RunnableConfig
 
 from agents.weather_forecast_agent.agent_factory import build_agent
@@ -30,7 +29,6 @@ def main() -> None:
 
     # Provide per-request runtime context used by tools (e.g., `get_user_city`)
     ctx = Context(user_id="1")
-    messages: list[BaseMessage] = []
 
     print("\nEnter your question (or 'exit' to quit):")
     while True:
@@ -40,23 +38,14 @@ def main() -> None:
             print("Exiting the weather forecast agent. Goodbye!")
             break
 
-        messages.append(HumanMessage(content=user_prompt))
-
         response = agent.invoke(
-            {"messages": messages},  # type: ignore
+            {"messages": [HumanMessage(content=user_prompt)]},
             config=config,
             context=ctx,
         )
         sr = response["structured_response"]
 
-        content = (
-            sr.weather_conditions
-            if sr.weather_conditions is not None
-            else sr.punny_response
-        )
-
         print(sr)  # ToolStrategy-structured output
-        messages.append(AIMessage(content=content))
 
 
 if __name__ == "__main__":

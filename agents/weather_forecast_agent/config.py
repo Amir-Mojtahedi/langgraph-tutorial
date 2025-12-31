@@ -39,7 +39,7 @@ local_model: BaseChatModel = init_chat_model(
     model=LOCAL_LLM_MODEL,
     model_provider=LOCAL_LLM_PROVIDER,
     base_url=LOCAL_LLM_URL,
-    api_key="",
+    api_key=API_KEY,
 )
 
 # In-memory checkpointer for thread-aware conversations
