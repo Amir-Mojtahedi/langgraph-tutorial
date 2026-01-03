@@ -18,7 +18,9 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "charliermarsh.ruff"
+        "charliermarsh.ruff",
+        "tomoki1207.pdf"
+
       ],
       "settings": {
         "python.defaultInterpreterPath": "/usr/local/python/current/bin/python",

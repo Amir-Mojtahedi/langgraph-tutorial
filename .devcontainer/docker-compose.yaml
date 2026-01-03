@@ -1,5 +1,28 @@
 services:
+
+  ollama-server:
+    build:
+      dockerfile: Dockerfile.ollama
+    container_name: ollama-container
+    environment:
+      OLLAMA_HOST: "0.0.0.0"
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:11434/api/tags > /dev/null"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+
   devcontainer:
+    depends_on:
+      ollama-server:
+        condition: service_healthy
     build:
       context: ..
       dockerfile: .devcontainer/Dockerfile
@@ -20,10 +43,21 @@ services:
     models:
       llm:
         endpoint_var: LOCAL_LLM_URL
-        model_var: LOCAL_LLM_MODEL   
+        model_var: LOCAL_LLM_MODEL 
+      embedding-model:
+        endpoint_var: LOCAL_EMBEDDING_MODEL_URL
+        model_var: LOCAL_EMBEDDING_MODEL  
 
     command: sleep infinity
+
+  
+    
   
 models:
   llm:
     model: ai/mistral:7B-Q4_0
+  embedding-model:
+    model: ai/embeddinggemma:latest
+
+volumes:
+  ollama_data:
